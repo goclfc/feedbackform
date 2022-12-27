@@ -8,6 +8,7 @@ import MoreInfo from "./components/MoreInfo";
 import OnlineStore from "./components/OnlineStore";
 import ProductForm from "./components/ProductForm";
 import ServiceForm from "./components/ServiceForm";
+import UserInfo from "./components/UserInfo";
 
 function App() {
   const [showSelectForm,setShowSelectForm] = useState(true)
@@ -19,8 +20,18 @@ function App() {
   const [showDrugstore,setShowDrugstore] = useState(false)
   const [showOnlinetore,setShowOnlinestore] = useState(false)
   const [showCallcenter,setShowCallcenter] = useState(false)
-  const handleAnonimClick = ()=>{
-    setShowSelectForm(false)
+  const [showUserInfo,setShowUserInfo] = useState(false)
+  const handleAnonimClick = (e)=>{
+    if(e.target.value ==='ანონიმური'){
+      setShowSelectForm(false)
+      setShowAgeForm(true)
+    }else {
+      setShowSelectForm(false)
+      setShowUserInfo(true)
+    }
+  }
+  const handleUserInfo=()=>{
+    setShowUserInfo(false)
     setShowAgeForm(true)
   }
   const handleAgeClick = (e)=>{
@@ -58,9 +69,10 @@ function App() {
     setShowProductForm(false)
     setShowMoreInfo(true)
   }
+  console.log(showOnlinetore)
   return (
-    <div className="wrapper w-full h-screen bg-white flex flex-wrap justify-center bg-niceBg">
-      <div className="w-full flex flex-col items-center drop-shadow-xl rounded-xl bg-readableBg md:w-1/3 "> 
+    <div className="wrapper w-full h-screen bg-white flex flex-wrap justify-center bg-niceBg p-4">
+      <div className="w-full flex flex-col items-center drop-shadow-xl rounded-xl bg-readableBg lg:w-2/3 "> 
       <div className="header flex w-full justify-center m-2 p-2">
         <h1 className="text-3xl text-white">საკონტაქტო ფორმა</h1>
       </div>
@@ -72,10 +84,11 @@ function App() {
       </div>
       <div className='form bg-formBg text-white  rounded-xl m-2 p-2'>
       {showSelectForm && <ChooseAnonim handleAnonimClick={handleAnonimClick} /> }
-      {showAgeForm && <AgeForm handleAgeClick={handleAgeClick} handleSkipClick={handleSkipClick}/>  }
+      {showUserInfo && <UserInfo handleUserInfo={handleUserInfo}/>}
+      {showAgeForm && <AgeForm handleAgeClick={handleAgeClick} handleSkipClick={handleSkipClick}/>}
       {showAbout && <About handleAboutClick={handleAboutClick} />}
       {showProductForm && <ProductForm handleProductClick={handleProductClick}/>}
-      {showServiceForm && <ServiceForm handleServiceClick = {handleServiceClick}/> }
+      {showServiceForm && <ServiceForm handleServiceClick ={handleServiceClick}/> }
       {showDrugstore&& <DrugstoreForm handleProductClick={handleProductClick}/>}
       {showOnlinetore&& <OnlineStore />}
       {showCallcenter&& <CallCenter />   }
