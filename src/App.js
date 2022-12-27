@@ -70,7 +70,7 @@ function App() {
       <div className="header flex w-full justify-center m-2 p-2">
         <h2 className="text-2xl text-white">გთხოვთ, შეავსეთ ფორმა</h2>
       </div>
-      <div className='form bg-formBg text-white border-2 rounded-xl m-2 p-2'>
+      <div className='form bg-formBg text-white  rounded-xl m-2 p-2'>
       {showSelectForm && <ChooseAnonim handleAnonimClick={handleAnonimClick} /> }
       {showAgeForm && <AgeForm handleAgeClick={handleAgeClick} handleSkipClick={handleSkipClick}/>  }
       {showAbout && <About handleAboutClick={handleAboutClick} />}
