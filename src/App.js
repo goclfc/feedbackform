@@ -86,11 +86,11 @@ function App() {
       {showSelectForm && <ChooseAnonim handleAnonimClick={handleAnonimClick} /> }
       {showUserInfo && <UserInfo handleUserInfo={handleUserInfo}/>}
       {showAgeForm && <AgeForm handleAgeClick={handleAgeClick} handleSkipClick={handleSkipClick}/>}
-      {showAbout && <About handleAboutClick={handleAboutClick} />}
+      {showAbout && <About handleAboutClick={handleAboutClick} setShowMoreInfo={setShowMoreInfo} setShowAbout={setShowAbout}/>}
       {showProductForm && <ProductForm handleProductClick={handleProductClick}/>}
       {showServiceForm && <ServiceForm handleServiceClick ={handleServiceClick}/> }
       {showDrugstore&& <DrugstoreForm handleProductClick={handleProductClick}/>}
-      {showOnlinetore&& <OnlineStore />}
+      {showOnlinetore&& <OnlineStore setShowMoreInfo={setShowMoreInfo}/>}
       {showCallcenter&& <CallCenter />   }
       {showMoreInfo && <MoreInfo />
       }
