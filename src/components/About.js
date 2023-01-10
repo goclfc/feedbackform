@@ -2,10 +2,12 @@ const About = (props)=>{
     const handleAboutClick = props.handleAboutClick
     const setShowMoreInfo = props.setShowMoreInfo
     const setShowAbout = props.setShowAbout
+    const setFormAbout = props.setFormAbout
     const handleClick = (e)=>{
         console.log(e.target.value)
         setShowAbout(false)
         setShowMoreInfo(true)
+        setFormAbout(e.target.value)
     }
     return (
         <div className="form w-full flex flex-col items-center m-2">

@@ -5,8 +5,10 @@ const UserInfo = (props)=>{
     const [showCall,setShowCall] = useState(false)
     const [showEmail,setShowEmail] = useState(false)
     const [showNext,setShowNext]=useState(false)
+    const setHowToContact = props.setHowToContact
+    const setContactInfo = props.setContactInfo
     const handleSmsClick = (e)=>{
-
+        setHowToContact('sms')
         setShowSms(true)
         setShowCall(false)
         setShowEmail(false)
@@ -14,14 +16,17 @@ const UserInfo = (props)=>{
     const saveNumber = (e)=>{
         if(e.target.value.length===9){
             setShowNext(true)
+            setContactInfo(e.target.value)
         }else(setShowNext(false))
     }
     const handleCallClick = ()=>{
+        setHowToContact('Call')
         setShowSms(false)
         setShowCall(true)
         setShowEmail(false)
     }
     const handleEmailClick = ()=>{
+        setHowToContact('Email')
         setShowSms(false)
         setShowCall(false)
         setShowEmail(true)
@@ -29,22 +34,13 @@ const UserInfo = (props)=>{
     const saveEmail = (e)=>{
         if(e.target.value.length>5){
             setShowNext(true)
+            setContactInfo(e.target.value)
         }else(setShowNext(false))
     }
     const next = ()=>{
         handleUserInfo()
     }
-    const getData = ()=>{
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-          };
-          
-          fetch("http://avws1.aversi.ge/MtrediCardInfoAPI/api/GetWinners?divider=20&CountWinners=20&Promotion=guliplus", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-    }
+
     return (
         <div>
         <div>
