@@ -70,16 +70,17 @@ const ProductForm = (props) => {
           </div>
         )}
         
-        {showContinue&&category==='აფთიაქი'&& 
+        {showContinue&&category==='აფთიაქი'?
 
         <DrugstoreForm handleProductClick={props.handleProductClick}/>
-        // <button
-        //   className="p-2 bg-green rounded-xl drop-shadow-xl text-white m-2"
-        //   value="კატეგორია"
-        //   onClick={handleProductClick}
-        // >
-        //   გაგრძელება
-        // </button>
+        :
+        <button
+          className="p-2 bg-green rounded-xl drop-shadow-xl text-white m-2"
+          value="კატეგორია"
+          onClick={handleProductClick}
+        >
+          გაგრძელება
+        </button>
         }
       </div>
     </div>
