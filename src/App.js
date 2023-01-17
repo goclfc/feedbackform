@@ -30,6 +30,7 @@ function App() {
   const [message,setMessage]=useState('')
   const [drugStoreInfo,setDrugstoreInfo]=useState('')
   const [visitTime,setVisitTime]=useState('')
+  const [success,setSuccess]=useState(false)
   const handleAnonimClick = (e)=>{
     if(e.target.value ==='ანონიმური'){
       setShowSelectForm(false)
@@ -39,6 +40,11 @@ function App() {
       setShowSelectForm(false)
       setShowUserInfo(true)
     }
+  }
+  const handleAnonimBackClick=()=>{
+    setShowSelectForm(true)
+    setShowAgeForm(false)
+    setShowUserInfo(false)
   }
   const handleUserInfo=()=>{
     setShowUserInfo(false)
@@ -70,6 +76,10 @@ function App() {
       setFormAbout('სხვა')
     }
   }
+  const handleAboutBackClick = ()=>{
+    setShowAbout(false)
+    setShowAgeForm(true)
+  }
   const handleServiceClick = (e)=>{
     setShowServiceForm(false)
     if(e.target.value==='სააფთიაქო სერვისი'){      
@@ -84,6 +94,7 @@ function App() {
     }
   }
   const handleProductClick =(e)=>{
+    setShowDrugstore(false)
     setShowProductForm(false)
     setShowMoreInfo(true)
   }
@@ -113,9 +124,13 @@ var requestOptions = {
 
   fetch("https://feedbackform.herokuapp.com/fdbck", requestOptions)
   .then(response => response.text())
-  .then(result => console.log(result))
+  .then(result => {
+    setShowMoreInfo(false)
+    setSuccess(true)
+  })
   .catch(error => console.log('error', error)); 
   }
+
   return (
     <div className="wrapper w-full h-screen bg-white flex flex-wrap justify-center bg-niceBg p-4">
       <div className="w-full flex flex-col items-center drop-shadow-xl rounded-xl bg-readableBg lg:w-2/3 "> 
@@ -129,10 +144,10 @@ var requestOptions = {
         <h2 className="text-2xl text-white">გთხოვთ, შეავსეთ ფორმა</h2>
       </div>
       <div className='form bg-formBg text-white  rounded-xl m-2 p-2'>
-      {showSelectForm && <ChooseAnonim handleAnonimClick={handleAnonimClick} /> }
-      {showUserInfo && <UserInfo handleUserInfo={handleUserInfo} setHowToContact={setHowToContact} setContactInfo={setContactInfo}/>}
-      {showAgeForm && <AgeForm handleAgeClick={handleAgeClick} handleSkipClick={handleSkipClick}/>}
-      {showAbout && <About handleAboutClick={handleAboutClick} setShowMoreInfo={setShowMoreInfo} setShowAbout={setShowAbout} setFormAbout={setFormAbout}/>}
+      {showSelectForm && <ChooseAnonim handleAnonimClick={handleAnonimClick} back={handleAnonimBackClick}/> }
+      {showUserInfo && <UserInfo handleUserInfo={handleUserInfo} setHowToContact={setHowToContact} setContactInfo={setContactInfo} back={handleAnonimBackClick}/>}
+      {showAgeForm && <AgeForm handleAgeClick={handleAgeClick} handleSkipClick={handleSkipClick} back={handleAnonimBackClick}/>}
+      {showAbout && <About handleAboutClick={handleAboutClick} setShowMoreInfo={setShowMoreInfo} setShowAbout={setShowAbout} setFormAbout={setFormAbout} back={handleAboutBackClick}/>}
       {showProductForm && <ProductForm handleProductClick={handleProductClick} setBrandName={setBrandName}/>}
       {showServiceForm && <ServiceForm handleServiceClick ={handleServiceClick}/> }
       {showDrugstore&& <DrugstoreForm handleProductClick={handleProductClick} setDrugstoreInfo={setDrugstoreInfo} setVisitTime={setVisitTime}/>}
@@ -140,6 +155,10 @@ var requestOptions = {
       {showCallcenter&& <CallCenter />   }
       {showMoreInfo && <MoreInfo setMessage={setMessage} sendForm={sendForm}/>
       }
+      {success&&
+      <div className="p-2 top-0 bottom-0 flex items-center rounded-xl">
+        შეტყობინება გაიზგავნა. მადლობას გიხდით უკუკავშირისთვის
+        </div>}
        </div>
       </div>
     </div>

@@ -40,9 +40,9 @@ const UserInfo = (props)=>{
     const next = ()=>{
         handleUserInfo()
     }
-
+    const handleBackClick=props.back
     return (
-        <div>
+        <div className="flex flex-col items-center">
         <div>
             <div> როგორ გსურთ დაგიკავშირდეთ?</div>
             <button className="p-2 bg-green rounded-xl drop-shadow-xl text-white m-2" value='სააფთიაქო სერვისი' onClick={handleSmsClick}>სმს</button>
@@ -75,7 +75,7 @@ const UserInfo = (props)=>{
             <button className="p-2 bg-green rounded-xl drop-shadow-xl text-white m-2" value='სააფთიაქო სერვისი' onClick={next}>გაგრძელება</button>
             }
         </div>}
-        
+        <button className="bg-light-red p-2 m-2 rounded-xl" onClick={handleBackClick}>უკან დაბრუნება</button>
         </div>
     )
 }

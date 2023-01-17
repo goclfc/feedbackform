@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import DrugstoreForm from "./DrugstoreForm";
 const ProductForm = (props) => {
   const [showCategory, setSHowCategory] = useState(true);
   const [showProductInfo, setShowProductInfo] = useState(false);
@@ -6,6 +7,8 @@ const ProductForm = (props) => {
   const [category,setCategory]=useState('')
   const handleProductClick = props.handleProductClick;
   const setBrandName = props.setBrandName;
+  const [brand,setBrand] = useState('')
+  const [product,setProduct] = useState('')
   const handleCategoryClick = (e)=> {
     setCategory(e.target.value)
     setSHowCategory(false)
@@ -15,6 +18,18 @@ const ProductForm = (props) => {
     setSHowCategory(true)
     setShowProductInfo(false)
   }
+  const saveBrandName = (e)=>{
+    setBrand(e.target.value)
+  }
+  const saveProductName= (e)=>{
+    setProduct(e.target.value)
+  }
+
+  useEffect(()=>{
+    if(product.length>3&&brand.length>3){
+      setShowContinue(true)
+    }
+  },[product,brand])
   return (
     <div className="form w-full flex flex-col items-center m-2">
       {/* <div className="question text-xl p-2">გთხოვთ აირჩიეთ ბრენდი</div> */}
@@ -42,24 +57,29 @@ const ProductForm = (props) => {
               type="text"
               className="p-2 m-2 border-2 rounded-xl drop-shadow-xl text-black text-center"
               placeholder="ბრენდი"
+              onChange={saveBrandName}
             ></input>
             <input
               type="text"
               className="p-2 m-2 border-2 rounded-xl drop-shadow-xl text-black text-center"
               placeholder="პროდუქტი"
+              onChange={saveProductName}
             ></input>
             </div>
             <button className="bg-light-red p-2 m-2 rounded-xl" onClick={handleBackClick}>უკან დაბრუნება</button>
           </div>
         )}
-        {showContinue&&
-        <button
-          className="p-2 bg-green rounded-xl drop-shadow-xl text-white m-2"
-          value="კატეგორია"
-          onClick={handleProductClick}
-        >
-          გაგრძელება
-        </button>
+        
+        {showContinue&&category==='აფთიაქი'&& 
+
+        <DrugstoreForm handleProductClick={props.handleProductClick}/>
+        // <button
+        //   className="p-2 bg-green rounded-xl drop-shadow-xl text-white m-2"
+        //   value="კატეგორია"
+        //   onClick={handleProductClick}
+        // >
+        //   გაგრძელება
+        // </button>
         }
       </div>
     </div>
