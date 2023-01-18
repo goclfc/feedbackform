@@ -80,6 +80,10 @@ function App() {
     setShowAbout(false)
     setShowAgeForm(true)
   }
+  const handleBClick = ()=>{
+    setShowAbout(true)
+    setShowProductForm(false)
+  }
   const handleServiceClick = (e)=>{
     setShowServiceForm(false)
     if(e.target.value==='სააფთიაქო სერვისი'){      
@@ -148,7 +152,7 @@ var requestOptions = {
       {showUserInfo && <UserInfo handleUserInfo={handleUserInfo} setHowToContact={setHowToContact} setContactInfo={setContactInfo} back={handleAnonimBackClick}/>}
       {showAgeForm && <AgeForm handleAgeClick={handleAgeClick} handleSkipClick={handleSkipClick} back={handleAnonimBackClick}/>}
       {showAbout && <About handleAboutClick={handleAboutClick} setShowMoreInfo={setShowMoreInfo} setShowAbout={setShowAbout} setFormAbout={setFormAbout} back={handleAboutBackClick}/>}
-      {showProductForm && <ProductForm handleProductClick={handleProductClick} setBrandName={setBrandName}/>}
+      {showProductForm && <ProductForm handleProductClick={handleProductClick} setBrandName={setBrandName} back={handleBClick}/>}
       {showServiceForm && <ServiceForm handleServiceClick ={handleServiceClick}/> }
       {showDrugstore&& <DrugstoreForm handleProductClick={handleProductClick} setDrugstoreInfo={setDrugstoreInfo} setVisitTime={setVisitTime}/>}
       {showOnlinetore&& <OnlineStore setShowMoreInfo={setShowMoreInfo}/>}

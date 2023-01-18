@@ -9,6 +9,7 @@ const ProductForm = (props) => {
   const setBrandName = props.setBrandName;
   const [brand,setBrand] = useState('')
   const [product,setProduct] = useState('')
+  const handleBClick = props.back
   const handleCategoryClick = (e)=> {
     setCategory(e.target.value)
     setSHowCategory(false)
@@ -70,17 +71,21 @@ const ProductForm = (props) => {
           </div>
         )}
         
-        {showContinue&&category==='აფთიაქი'?
+        {showContinue&&category==='აფთიაქი'&&
 
         <DrugstoreForm handleProductClick={props.handleProductClick}/>
-        :
-        <button
+        
+
+        }
+        {showContinue && category!='აფთიაქი'&&<button
           className="p-2 bg-green rounded-xl drop-shadow-xl text-white m-2"
           value="კატეგორია"
           onClick={handleProductClick}
         >
           გაგრძელება
-        </button>
+        </button>}
+        {showCategory&&
+        <button className="bg-light-red p-2 m-2 rounded-xl" onClick={handleBClick}>უკან დაბრუნება</button>
         }
       </div>
     </div>
